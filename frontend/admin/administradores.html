@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<!-- [INTEGRACIÓN] Página nueva: Gestor de administradores (Req 5.6, I-5.10, I-5.11).
+     Usa la misma estructura y hojas de estilo que el resto del portal del administrador. -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administradores | IPN - Portal académico</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin" data-pagina="administradores">
+
+  <header class="header-ipn">
+    <div class="header-ipn__contenido">
+      <a href="dashboard.html" class="header-ipn__logo" aria-label="Ir al panel">IPN</a>
+      <div class="header-ipn__texto">
+        <strong>Instituto Politécnico Nacional</strong>
+        <span>Portal académico</span>
+      </div>
+    </div>
+  </header>
+
+  <nav id="nav-admin" class="nav-admin" aria-label="Navegación del administrador"></nav>
+
+  <main class="admin-main">
+    <div class="portal__barra">
+      <p class="portal__etiqueta">Administrador</p>
+      <!-- [INTEGRACIÓN] Req I-5.1: "cerrar sesión" ahora está en la barra de navegación -->
+    </div>
+
+    <h1 class="portal__titulo">Gestor de administradores</h1>
+    <p class="portal__subtitulo">Consulta la cuenta con la sesión activa y registra a nuevos encargados del laboratorio.</p>
+
+    <!-- Req I-5.11: información de la cuenta activa (nombre y folio) -->
+    <section class="stats" aria-label="Cuenta activa">
+      <div class="stat">
+        <span class="stat__etiqueta">Cuenta activa</span>
+        <span id="cuenta-nombre" class="stat__valor" style="font-size:1.25rem">—</span>
+        <span class="stat__accion">Folio <strong id="cuenta-folio">—</strong></span>
+      </div>
+    </section>
+
+    <div class="barra-herramientas" style="justify-content: space-between; align-items: center; margin-top: 1.25rem;">
+      <p id="contador" class="contador" style="margin: 0;"></p>
+      <button type="button" id="btn-nuevo-admin" class="btn btn--primario btn--auto">+ Crear nuevo administrador</button>
+    </div>
+
+    <div class="tabla-wrap">
+      <table class="tabla">
+        <thead>
+          <tr>
+            <th>Folio</th>
+            <th>Nombre</th>
+            <th>Sesión</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-cuerpo"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer class="footer-ipn">
+    <p>Instituto Politécnico Nacional</p>
+    <p>Portal académico · Acceso web</p>
+  </footer>
+
+  <!-- Modal: Registro de administradores (Req I-5.10) -->
+  <div id="modal-admin" class="modal" role="dialog" aria-modal="true" aria-labelledby="ma-titulo">
+    <div class="modal__caja">
+      <h2 id="ma-titulo" class="modal__titulo">Nuevo administrador</h2>
+
+      <form id="form-admin" novalidate>
+        <div class="campo">
+          <label for="adm-nombre">Nombre completo</label>
+          <input type="text" id="adm-nombre" placeholder="Ej. Juan Pérez García" autocomplete="off" data-foco>
+          <span class="campo__error" id="error-adm-nombre"></span>
+        </div>
+
+        <div class="campo">
+          <label for="adm-contrasena">Contraseña inicial</label>
+          <input type="password" id="adm-contrasena" placeholder="Mínimo 8 caracteres" autocomplete="new-password">
+          <span class="campo__error" id="error-adm-contrasena"></span>
+        </div>
+
+        <p class="campo__nota">El folio se genera automáticamente al guardar.</p>
+
+        <div class="modal__acciones modal__acciones--columna">
+          <button type="submit" class="btn btn--primario">Crear nuevo administrador</button>
+          <button type="button" class="btn btn--secundario" data-cerrar-modal>Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/validaciones.js"></script>
+  <script src="../js/api/mockData.js"></script>
+  <script src="../js/api/apiClient.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>
